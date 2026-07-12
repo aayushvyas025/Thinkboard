@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 
 function NoteDetail() {
-  return <Suspense>NoteDetail</Suspense>;
+  return <Suspense>Note Detail</Suspense>;
 }
 
 export default NoteDetail;
