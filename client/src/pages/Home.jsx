@@ -2,18 +2,22 @@ import React, { Suspense, useEffect } from "react";
 import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";
+import Loader from "../components/loader/loader";
 
 function Home() {
-  const { isRateLimited, fetchNotes } = useFetchNotes();
+  const { isRateLimited, fetchNotes, notes, isLoading } = useFetchNotes();
 
   useEffect(() => {
     fetchNotes();
-  }, [])
+  }, []);
+
   return (
     <Suspense>
       <Layout>
         <Header />
+        <div className="max-w-7xl mx-auto pt-4 mt-0"></div>
         {isRateLimited && <RateLimiting />}
+        {isLoading && <Loader text={"Notes Loading...."} style={'text-center text-primary'} />}
       </Layout>
     </Suspense>
   );
