@@ -6,15 +6,13 @@ function useFetchNotes() {
   const [isLoading, setLoading] = useState(true);
   const [notes, setNotes] = useState([]);
   const { backendUrl } = envVariables;
-  console.log(backendUrl)
-
   async function fetchNotes() {
     setLoading(true);
     setRateLimited(false);
     try {
       const response = await fetch(`${backendUrl}/notes/fetch`);
       const data = await response.json();
-      console.log(data);
+      setNotes(data.notes);
     } catch (error) {
       console.error(`Error while fetching notes: ${error.message}`);
     } finally {
