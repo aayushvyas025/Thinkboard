@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import RateLimiting from "../components/rate-limiting/RateLimiting";
 
 function Layout({ children }) {
-const [isRateLimited, setRateLimited] = useState(false); 
+const [isRateLimited, setRateLimited] = useState(true); 
   return (
     <main className="min-h-screen">
       {children}
