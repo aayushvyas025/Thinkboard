@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import RateLimiting from "../components/rate-limiting/RateLimiting";
+import React from "react";
 
 function Layout({ children }) {
-const [isRateLimited, setRateLimited] = useState(true); 
-  return (
-    <main className="min-h-screen">
-      {children}
-      {isRateLimited && <RateLimiting />}
-    </main>
-  );
+  return <main className="min-h-screen">{children}</main>;
 }
 
 export default Layout;
