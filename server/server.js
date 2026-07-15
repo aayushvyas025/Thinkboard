@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import envVariables from "#constant/envs.constant";
 import apiRoutes from "#constant/routes.constant";
 import notesRoutes from "#routes/notes/notes.route";
@@ -6,12 +7,17 @@ import setupErrorMiddleware from "#middleware/error/error.middleware";
 import databaseConnection from "#config/database/database.config";
 import rateLimiter from "#middleware/rate-limiting/rateLimiting.middleware";
 
-const { backendPort } = envVariables;
+const { backendPort, frontendDomain } = envVariables;
 const { BASE } = apiRoutes;
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: frontendDomain,
+  }),
+);
 app.use(rateLimiter);
 app.use(BASE, notesRoutes);
 
