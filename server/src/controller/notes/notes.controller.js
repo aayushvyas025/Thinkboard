@@ -80,7 +80,7 @@ export const createNote = async (request, response, next) => {
 
     return response
       .status(created)
-      .json({ success: success, message: notesCreated });
+      .json({ success: success, message: notesCreated, newNote });
   } catch (error) {
     console.error(`Error, while create note:${error.message}`);
     next(error);

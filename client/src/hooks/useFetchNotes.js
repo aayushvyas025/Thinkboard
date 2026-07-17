@@ -7,7 +7,6 @@ function useFetchNotes() {
   const [isRateLimited, setRateLimited] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [notes, setNotes] = useState([]);
-  const { backendUrl } = envVariables;
   async function fetchNotes() {
     setLoading(true);
     try {
@@ -19,7 +18,6 @@ function useFetchNotes() {
       toast.error(`Error, while fetching notes`);
       if (error?.response?.status === 429) {
         setRateLimited(true);
-        toast.error("Failed to load notes");
       }
     } finally {
       setLoading(false);
