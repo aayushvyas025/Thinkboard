@@ -3,7 +3,7 @@ import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";
 import Loader from "../components/loader/loader";
-import NotesContainer from "../components/notes/NotesContainer"; 
+import NotesContainer from "../components/notes/NotesContainer";
 import RateLimiting from "../components/rate-limiting/RateLimiting";
 
 function Home() {
@@ -25,9 +25,9 @@ function Home() {
             style={"text-center text-primary py-10"}
           />
         )}
-        {notes.length > 0 &&
-          !isRateLimited &&
-          notes.map((note) => <NotesContainer key={note._id} note={note} />)}
+        {notes.length > 0 && !isRateLimited && (
+          <NotesContainer notes={notes} />
+        )}
       </Layout>
     </Suspense>
   );

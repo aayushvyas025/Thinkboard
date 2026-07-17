@@ -19,6 +19,7 @@ function useFetchNotes() {
       toast.error(`Error, while fetching notes`);
       if (error?.response?.status === 429) {
         setRateLimited(true);
+        toast.error("Failed to load notes");
       }
     } finally {
       setLoading(false);

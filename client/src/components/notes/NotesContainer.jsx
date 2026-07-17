@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router";
 import { PenSquareIcon, Trash2Icon } from "lucide-react";
+import NotesCard from "./NotesCard";
 
-function NotesContainer({note}) {
+function NotesContainer({ notes }) {
   return (
-    <Link to={`/note/${note._id}`} className="card bg-base-100 hover:shadow-lg transition-all duration-200 border-t-4 border-solid border-[#00FF94]">
-      
-    </Link>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {notes.map((note) => (
+        <NotesCard key={note._id} note={note} />
+      ))}
+    </div>
   );
 }
 
