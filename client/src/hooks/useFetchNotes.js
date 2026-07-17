@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import envVariables from "../constant/envVariables";
+import API from "../config/axiosConfig";
 
 function useFetchNotes() {
   const [isRateLimited, setRateLimited] = useState(false);
@@ -10,16 +11,14 @@ function useFetchNotes() {
   async function fetchNotes() {
     setLoading(true);
     try {
-      const response = await fetch(`${backendUrl}/notes/fetch`);
-      const data = await response.json();
-      setNotes(data.notes);
+      const response = await API.get(`/notes/fetch`);
+      setNotes(response.data.notes);
       setRateLimited(false);
     } catch (error) {
       console.error(`Error while fetching notes: ${error.message}`);
+      toast.error(`Error, while fetching notes`);
       if (error?.response?.status === 429) {
         setRateLimited(true);
-      } else {
-        toast.error(`Failed to load notes`);
       }
     } finally {
       setLoading(false);

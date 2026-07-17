@@ -5,7 +5,7 @@ import { PlusIcon } from "lucide-react";
 function Navbar() {
   return (
     <nav className="flex items-center justify-between">
-      <h1 className="text-3xl font-bold text-primary font-mono tracking-tighter">
+      <h1 className="text-3xl font-bold text-primary font-mono tracking-tight">
         ThinkBoard
       </h1>
       <div className="flex items-center gap-4">

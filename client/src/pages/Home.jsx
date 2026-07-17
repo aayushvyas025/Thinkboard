@@ -3,6 +3,8 @@ import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";
 import Loader from "../components/loader/loader";
+import NotesContainer from "../components/notes/NotesContainer"; 
+import RateLimiting from "../components/rate-limiting/RateLimiting";
 
 function Home() {
   const { isRateLimited, fetchNotes, notes, isLoading } = useFetchNotes();
@@ -17,7 +19,15 @@ function Home() {
         <Header />
         <div className="max-w-7xl mx-auto pt-4 mt-0"></div>
         {isRateLimited && <RateLimiting />}
-        {isLoading && <Loader text={"Notes Loading...."} style={'text-center text-primary'} />}
+        {isLoading && (
+          <Loader
+            text={"Notes Loading...."}
+            style={"text-center text-primary py-10"}
+          />
+        )}
+        {notes.length > 0 &&
+          !isRateLimited &&
+          notes.map((note) => <NotesContainer key={note._id} note={note} />)}
       </Layout>
     </Suspense>
   );
