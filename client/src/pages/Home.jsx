@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <Suspense>
-      <Layout>
+      <Layout style={'relative h-full w-full'}>
         <Header />
         <div className="max-w-7xl mx-auto pt-4 mt-0"></div>
         {isRateLimited && <RateLimiting />}

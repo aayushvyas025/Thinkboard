@@ -1,7 +1,7 @@
 import React from "react";
 
-function Layout({ children }) {
-  return <main className="min-h-screen">{children}</main>;
+function Layout({ children, style }) {
+  return <main className={style}>{children}</main>;
 }
 
 export default Layout;
