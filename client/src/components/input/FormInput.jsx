@@ -1,6 +1,7 @@
 import React from "react";
 import Label from "../Label/Label";
 import Input from "./Input";
+import TextArea from "./TextArea";
 
 function FormInput({
   labelRef,
@@ -23,6 +24,14 @@ function FormInput({
         style={style}
         onChangeHandler={onChangeHandler}
       />
+      {label === "description" && (
+        <TextArea
+          id={inputId}
+          placeholder={placeholder}
+          style={style}
+          onChangeHandler={onChangeHandler}
+        />
+      )}
     </div>
   );
 }
