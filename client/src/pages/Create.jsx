@@ -8,6 +8,7 @@ import Label from "../components/Label/Label";
 import Input from "../components/input/Input";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import BackButton from "../components/BackButton/BackButton";
+import FormInput from "../components/input/FormInput";
 
 function Create() {
   const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
@@ -24,16 +25,19 @@ function Create() {
               <div className="card-body">
                 <SectionHeader title={"Create New Note"} />
                 <Form onSubmitHandler={handleSubmit}>
-                  <div className="form-controls mb-4">
-                    <Label ref={"title"} label={"Title"} />
-                    <Input
-                      id={"title"}
-                      type={"text"}
-                      placeholder={"Note Title"}
-                      value={formData.title}
-                      style={"input input-bordered"}
-                    />
-                  </div>
+                  <FormInput
+                    label={"Title"}
+                    labelRef={"title"}
+                    inputId={"title"}
+                    type={"text"}
+                    placeholder={"Note Title"}
+                    value={formData.title}
+                    style={"input input-bordered"}
+                    onChangeHandler={(event) =>
+                      setFormData({ ...formData, title: event.target.value })
+                    }
+                  /> 
+                  <FormInput label={"Description"} labelRef={"description"} inputId={"description"}  />
                 </Form>
               </div>
             </div>
