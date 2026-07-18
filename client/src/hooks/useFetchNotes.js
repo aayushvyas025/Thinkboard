@@ -5,7 +5,7 @@ import API from "../config/axiosConfig";
 
 function useFetchNotes() {
   const [isRateLimited, setRateLimited] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [notes, setNotes] = useState([]);
   async function fetchNotes() {
     setLoading(true);

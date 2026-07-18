@@ -9,11 +9,13 @@ import Input from "../components/input/Input";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import BackButton from "../components/BackButton/BackButton";
 import FormInput from "../components/input/FormInput";
+import Loader from "../components/loader/Loader";
 
 function Create() {
   const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); 
+    
   }
   return (
     <Suspense>
@@ -36,8 +38,34 @@ function Create() {
                     onChangeHandler={(event) =>
                       setFormData({ ...formData, title: event.target.value })
                     }
-                  /> 
-                  <FormInput label={"Description"} labelRef={"description"} inputId={"description"}  />
+                  />
+                  <FormInput
+                    label={"Description"}
+                    labelRef={"description"}
+                    inputId={"description"}
+                    placeholder={"Write Note Description"}
+                    value={formData.description}
+                    style={"textarea textarea-bordered h-32"}
+                    onChangeHandler={(event) =>
+                      setFormData({
+                        ...formData,
+                        description: event.target.value,
+                      })
+                    }
+                  />
+                  <div className="card-actions justify-end">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <Loader text={"Creating...."} />
+                      ) : (
+                        "Create Notes"
+                      )}
+                    </button>
+                  </div>
                 </Form>
               </div>
             </div>

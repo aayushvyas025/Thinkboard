@@ -16,15 +16,17 @@ function FormInput({
   return (
     <div className="form-control mb-4">
       <Label ref={labelRef} label={label} />
-      <Input
-        id={inputId}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        style={style}
-        onChangeHandler={onChangeHandler}
-      />
-      {label === "description" && (
+      {labelRef === "title" && (
+        <Input
+          id={inputId}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          style={style}
+          onChangeHandler={onChangeHandler}
+        />
+      )}
+      {labelRef === "description" && (
         <TextArea
           id={inputId}
           placeholder={placeholder}
