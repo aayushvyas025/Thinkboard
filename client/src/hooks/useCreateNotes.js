@@ -5,7 +5,6 @@ import API from "../config/axiosConfig";
 function useCreateNotes() {
   const [formData, setFormData] = useState({ title: "", description: "" });
   const [isLoading, setIsLoading] = useState(false);
-  const [isRateLimited, setRateLimited] = useState(false);
 
   async function createNotes() {
     setIsLoading(true);
@@ -15,19 +14,21 @@ function useCreateNotes() {
         description: formData.description,
       });
       setFormData(response.data.newNote);
-      setRateLimited(false);
     } catch (error) {
       console.error(`Error, while creating notes ${error.message}`);
       toast.error("Error, while creating notes");
       if (error?.response?.status === 429) {
-        setRateLimited(true);
+        toast.error(`Slow down! You are creating the notes to fast`, {
+          duration: 4000,
+          icon: "💀",
+        });
       }
     } finally {
       setIsLoading(false);
     }
   }
 
-  return { formData, isLoading, isRateLimited, createNotes, setFormData };
+  return { formData, isLoading, createNotes, setFormData };
 }
 
 export default useCreateNotes;

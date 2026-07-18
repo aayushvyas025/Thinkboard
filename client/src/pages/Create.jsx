@@ -25,10 +25,11 @@ function Create() {
 
     if (!validation.success) {
       toast.error(`All fields are required`);
+    } else {
+      createNotes();
+      toast.success(`Notes created successfully`);
+      navigate("/");
     }
-    createNotes();
-    toast.success(`Notes created successfully`);
-    navigate("/");
   }
   return (
     <Suspense>
