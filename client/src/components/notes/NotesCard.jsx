@@ -2,8 +2,22 @@ import { PenSquareIcon, Trash2Icon } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 import { formattedDate } from "../../utils/dateUtils";
+import useDeleteNote from "../../hooks/useDeleteNote";
+import toast from "react-hot-toast";
 
-function NotesCard({ note }) {
+function NotesCard({ note, setNotes }) {
+  const { deleteNote, isLoading } = useDeleteNote();
+
+  function handleDelete(event, id) {
+    event.preventDefault();
+    const confirm = window.confirm(
+      "Are you sure you want to delete this note?",
+    );
+    if (!confirm) return;
+    deleteNote(id);
+    setNotes((prev) => prev.filter((note) => note._id !== id));
+    toast.success(`Note deleted successfully`);
+  }
   return (
     <Link
       className="card bg-base-100 hover:shadow-lg transition-all duration-200 border-t-4 border-solid border-[#00FF9D]"
@@ -18,7 +32,10 @@ function NotesCard({ note }) {
           </span>
           <div className="flex items-center gap-1">
             <PenSquareIcon className="size-4" />
-            <button className="btn btn-ghost btn-xs">
+            <button
+              className="btn btn-ghost btn-xs"
+              onClick={(event) => handleDelete(event, note._id)}
+            >
               <Trash2Icon className="size-4 text-error" />
             </button>
           </div>

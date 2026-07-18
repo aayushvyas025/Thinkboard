@@ -24,7 +24,7 @@ function useFetchNotes() {
     }
   }
 
-  return { isRateLimited, isLoading, fetchNotes, notes };
+  return { isRateLimited, isLoading, fetchNotes, notes, setNotes };
 }
 
 export default useFetchNotes;

@@ -8,11 +8,11 @@ import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
 
 function Home() {
-  const { isRateLimited, fetchNotes, notes, isLoading } = useFetchNotes();
+  const { isRateLimited, fetchNotes, notes, isLoading, setNotes } = useFetchNotes();
 
   useEffect(() => {
     fetchNotes();
-  }, []);
+  }, [setNotes]);
 
   return (
     <Suspense>
@@ -28,7 +28,7 @@ function Home() {
           />
         )}
         {notes.length > 0 && !isRateLimited && (
-          <NotesContainer notes={notes} />
+          <NotesContainer notes={notes} setNotes={setNotes} />
         )}
       </Layout>
     </Suspense>

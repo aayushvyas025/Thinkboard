@@ -10,7 +10,7 @@ function useFetchNoteById() {
   async function fetchNoteById(id) {
     setLoading(true);
     try {
-      const response = await API.get(`/notes/fetch/:${id}`);
+      const response = await API.get(`/notes/fetch/${id}`);
       setNote(response?.data?.note);
       setRateLimited(false);
     } catch (error) {
