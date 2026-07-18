@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Layout from "../layout/Layout";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useCreateNotes from "../hooks/useCreateNotes";
 import { ArrowLeftIcon } from "lucide-react";
 import Form from "../components/form/Form";
@@ -10,12 +10,25 @@ import SectionHeader from "../components/SectionHeader/SectionHeader";
 import BackButton from "../components/BackButton/BackButton";
 import FormInput from "../components/input/FormInput";
 import Loader from "../components/loader/Loader";
+import { inputValidations } from "../utils/validations";
+import toast from "react-hot-toast";
 
 function Create() {
   const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
+  const navigate = useNavigate();
   function handleSubmit(event) {
-    event.preventDefault(); 
-    
+    event.preventDefault();
+    const validation = inputValidations({
+      title: formData.title,
+      description: formData.description,
+    });
+
+    if (!validation.success) {
+      toast.error(`All fields are required`);
+    }
+    createNotes();
+    toast.success(`Notes created successfully`);
+    navigate("/");
   }
   return (
     <Suspense>

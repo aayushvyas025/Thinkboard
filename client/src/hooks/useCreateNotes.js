@@ -10,7 +10,10 @@ function useCreateNotes() {
   async function createNotes() {
     setIsLoading(true);
     try {
-      const response = await API.post(`/notes/create`);
+      const response = await API.post(`/notes/create`, {
+        title: formData.title,
+        description: formData.description,
+      });
       setFormData(response.data.newNote);
       setRateLimited(false);
     } catch (error) {
