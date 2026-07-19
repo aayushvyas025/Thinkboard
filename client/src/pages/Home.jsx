@@ -6,9 +6,11 @@ import Loader from "../components/loader/loader";
 import NotesContainer from "../components/notes/NotesContainer";
 import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
+import NotesNotFound from "../components/notes/NotesNotFound";
 
 function Home() {
-  const { isRateLimited, fetchNotes, notes, isLoading, setNotes } = useFetchNotes();
+  const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
+    useFetchNotes();
 
   useEffect(() => {
     fetchNotes();
@@ -16,20 +18,22 @@ function Home() {
 
   return (
     <Suspense>
-      <Layout style={'relative h-full w-full'}>
+      <Layout style={"relative min-h-screen"}>
         <BackgroundGradient />
         <Header />
-        <div className="max-w-7xl mx-auto pt-4 mt-0"></div>
-        {isRateLimited && <RateLimiting />}
-        {isLoading && (
-          <Loader
-            text={"Notes Loading...."}
-            style={"text-center text-primary py-10"}
-          />
-        )}
-        {notes.length > 0 && !isRateLimited && (
-          <NotesContainer notes={notes} setNotes={setNotes} />
-        )}
+        <div className="max-w-7xl mx-auto pt-4 mt-0">
+          {notes.length === 0 && !isRateLimited &&  <NotesNotFound />}
+          {isRateLimited && <RateLimiting />}
+          {isLoading && (
+            <Loader
+              text={"Notes Loading...."}
+              style={"text-center text-primary py-10"}
+            />
+          )}
+          {notes.length > 0 && !isRateLimited && (
+            <NotesContainer notes={notes} setNotes={setNotes} />
+          )}
+        </div>
       </Layout>
     </Suspense>
   );
