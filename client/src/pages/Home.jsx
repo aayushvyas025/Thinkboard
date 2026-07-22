@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";
@@ -7,10 +7,14 @@ import NotesContainer from "../components/notes/NotesContainer";
 import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
 import NotesNotFound from "../components/notes/NotesNotFound";
+import NoteDeleteAlert from "../components/NoteDeleteAlert/NoteDeleteAlert";
+import useAlertDialogOptions from "../hooks/useAlertDialogOptions";
+import useAlertOptions from "../hooks/useAlertOptions";
 
 function Home() {
   const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
     useFetchNotes();
+  const {isAlertClose, setIsAlertClose} = useAlertOptions(); 
 
   useEffect(() => {
     fetchNotes();
@@ -19,10 +23,13 @@ function Home() {
   return (
     <Suspense>
       <Layout style={"relative min-h-screen"}>
+
         <BackgroundGradient />
         <Header />
         <div className="max-w-7xl mx-auto pt-4 mt-0">
-          {notes.length === 0 && !isRateLimited &&  <NotesNotFound />}
+          {notes.length === 0 && !isRateLimited && !isLoading && (
+            <NotesNotFound />
+          )}
           {isRateLimited && <RateLimiting />}
           {isLoading && (
             <Loader
