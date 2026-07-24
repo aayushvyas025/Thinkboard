@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 
 function useFetchNoteById() {
   const [isLoading, setLoading] = useState(false);
-  const [isRateLimited, setRateLimited] = useState(false);
   const [note, setNote] = useState([]);
 
   async function fetchNoteById(id) {
@@ -12,16 +11,20 @@ function useFetchNoteById() {
     try {
       const response = await API.get(`/notes/fetch/${id}`);
       setNote(response?.data?.note);
-      setRateLimited(false);
     } catch (error) {
       console.error(`Error, while fetching note by id ${error.message}`);
       toast.error(`Error, while fetching note by id`);
       if (error?.response?.status === 429) {
-        setRateLimited(true);
+        toast.error("Slow down! You are creating the notes to fast", {
+          duration: 4000,
+          icon: "💀",
+        });
       }
     } finally {
       setLoading(false);
     }
   }
-  return { isLoading, isRateLimited, note, fetchNoteById };
+  return { isLoading, note, fetchNoteById, setNote };
 }
+
+export default useFetchNoteById;

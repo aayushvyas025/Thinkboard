@@ -28,7 +28,8 @@ function FormInput({
       )}
       {labelRef === "description" && (
         <TextArea
-          id={inputId}
+          id={inputId} 
+          value={value}
           placeholder={placeholder}
           style={style}
           onChangeHandler={onChangeHandler}

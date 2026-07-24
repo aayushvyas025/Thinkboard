@@ -1,33 +1,29 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import API from "../config/axiosConfig";
+import toast from "react-hot-toast";
 
 function useUpdateNote() {
-  const [note, setNote] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [isRateLimited, setIsRateLimited] = useState(false);
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   async function updateNote(id) {
-    setIsLoading(true);
-    setSaving(false);
+    setSaving(true);
     try {
-      const response = await API.put(`/notes/update/${id}`);
-      setSaving(true);
-      setNote(response.data.note);
-      setIsRateLimited(false);
+      await API.put(`/notes/update/${id}`);
     } catch (error) {
       console.error(`Error, while updating notes ${error.message}`);
       if (error?.response?.status === 429) {
-        setIsRateLimited(true);
+        toast.error("Slow down! You are creating the notes to fast", {
+          duration: 4000,
+          icon: "💀",
+        });
       }
     } finally {
-      setIsLoading(false);
       setSaving(false);
     }
   }
 
-  return { note, isLoading, isRateLimited, saving, updateNote };
+  return {  saving, updateNote };
 }
+
+export default useUpdateNote;

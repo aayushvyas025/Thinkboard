@@ -33,7 +33,7 @@ function Home() {
               style={"text-center text-primary py-10"}
             />
           )}
-          {notes.length > 0 && !isRateLimited && (
+          {notes.length >= 0 && !isRateLimited && (
             <NotesContainer notes={notes} setNotes={setNotes} />
           )}
         </div>
