@@ -22,7 +22,7 @@ function DetailNote({ note, setNote }) {
     if (!validation.success) {
       toast.error("All fields are required");
     } else {
-      updateNote(id);
+      updateNote(id, note);
       toast.success("Notes updated successfully");
       navigate("/");
     }
@@ -70,13 +70,13 @@ function DetailNote({ note, setNote }) {
               style={"textarea textarea-bordered h-32"}
               value={note.description}
               onChangeHandler={(event) =>
-                setNote({ ...note, description: event.target.description })
+                setNote({ ...note, description: event.target.value })
               }
             />
             <div className="card-actions justify-end">
               <button
                 type="submit"
-                onClick={() => handleUpdate(note._id)}
+                onClick={() => handleUpdate(note._id, note)}
                 className="btn btn-primary"
                 disabled={saving}
               >

@@ -11,11 +11,10 @@ import NotesNotFound from "../components/notes/NotesNotFound";
 function Home() {
   const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
     useFetchNotes();
-  
 
   useEffect(() => {
     fetchNotes();
-  }, [setNotes]);
+  }, []);
 
   return (
     <Suspense>

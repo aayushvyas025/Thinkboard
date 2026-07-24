@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 function useUpdateNote() {
   const [saving, setSaving] = useState(false);
 
-  async function updateNote(id) {
+  async function updateNote(id, note) {
     setSaving(true);
     try {
-      await API.put(`/notes/update/${id}`);
+      await API.put(`/notes/update/${id}`, note);
     } catch (error) {
       console.error(`Error, while updating notes ${error.message}`);
       if (error?.response?.status === 429) {
@@ -23,7 +23,7 @@ function useUpdateNote() {
     }
   }
 
-  return {  saving, updateNote };
+  return { saving, updateNote };
 }
 
 export default useUpdateNote;
