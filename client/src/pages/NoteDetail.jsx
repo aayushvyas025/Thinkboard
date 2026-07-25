@@ -7,9 +7,11 @@ import { LoaderIcon, Trash2Icon } from "lucide-react";
 import BackButton from "../components/BackButton/BackButton";
 import useDeleteNote from "../hooks/useDeleteNote";
 import DetailNote from "../components/notes/DetailNote";
+import NoteDetailSkeleton from "../components/skeletons/NoteDetailSkeleton";
 
 function NoteDetail() {
-  const { isLoading, isRateLimited, note, fetchNoteById, setNote } = useFetchNoteById();
+  const { isLoading, isRateLimited, note, fetchNoteById, setNote } =
+    useFetchNoteById();
   const { id } = useParams();
 
   useEffect(() => {
@@ -27,9 +29,9 @@ function NoteDetail() {
   }
 
   return (
-    <Suspense>
+    <Suspense fallback={<NoteDetailSkeleton />}>
       <Layout style={"min-h-screen bg-base-200"}>
-        <DetailNote note={note} setNote={setNote} />  
+        <DetailNote note={note} setNote={setNote} />
       </Layout>
     </Suspense>
   );

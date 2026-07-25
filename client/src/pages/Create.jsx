@@ -6,9 +6,9 @@ import { ArrowLeftIcon } from "lucide-react";
 import Form from "../components/form/Form";
 import Label from "../components/Label/Label";
 import Input from "../components/input/Input";
-import SectionHeader from "../components/SectionHeader/SectionHeader";
 import BackButton from "../components/BackButton/BackButton";
 import FormInput from "../components/input/FormInput";
+import SectionHeader from "../components/page/SectionHeader"
 import Loader from "../components/loader/Loader";
 import { inputValidations } from "../utils/validations";
 import toast from "react-hot-toast";
@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 function Create() {
   const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
   const navigate = useNavigate();
-  function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
     const validation = inputValidations({
       title: formData.title,
@@ -26,7 +26,7 @@ function Create() {
     if (!validation.success) {
       toast.error(`All fields are required`);
     } else {
-      createNotes();
+     await createNotes();
       toast.success(`Notes created successfully`);
       navigate("/");
     }

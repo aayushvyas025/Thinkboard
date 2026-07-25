@@ -8,13 +8,13 @@ import toast from "react-hot-toast";
 function NotesCard({ note, setNotes }) {
   const { deleteNote, isLoading } = useDeleteNote();
 
-  function handleDelete(event, id) {
+  async function handleDelete(event, id) {
     event.preventDefault();
     const confirm = window.confirm(
       "Are you sure you want to delete this note?",
     );
     if (!confirm) return;
-    deleteNote(id);
+    await deleteNote(id);
     setNotes((prev) => prev.filter((note) => note._id !== id));
     toast.success(`Note deleted successfully`);
   }

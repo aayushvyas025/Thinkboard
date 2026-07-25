@@ -13,28 +13,27 @@ function DetailNote({ note, setNote }) {
   const { deleteNote } = useDeleteNote();
   const navigate = useNavigate();
 
-  function handleUpdate(id) {
+  async function handleUpdate(id) {
     const validation = inputValidations({
-      title: note.title,
-      description: note.description,
+      title: note?.title,
+      description: note?.description,
     });
 
     if (!validation.success) {
       toast.error("All fields are required");
     } else {
-      updateNote(id, note);
+      await updateNote(id, note);
       toast.success("Notes updated successfully");
       navigate("/");
     }
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     const confirm = window.confirm(
       "Are you sure you want to delete this note?",
     );
     if (!confirm) return;
-    deleteNote(id);
-    setNote((prev) => prev.filter((note) => note._id !== id));
+    await deleteNote(id);
     toast.success(`Note deleted successfully`);
     navigate("/");
   }

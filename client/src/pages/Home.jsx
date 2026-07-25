@@ -12,6 +12,8 @@ function Home() {
   const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
     useFetchNotes();
 
+    console.log(notes); 
+
   useEffect(() => {
     fetchNotes();
   }, []);

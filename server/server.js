@@ -5,12 +5,14 @@ import databaseConnection from "#config/database/database.config";
 import setupErrorMiddleware from "#middleware/error/error.middleware";
 import setupBasicMiddleware from "#middleware/basic/basic.middleware";
 import setupRoutesMiddleware from "#middleware/api_routes/routes.middleware";
+import setupStaticContent from "#middleware/static_content/staticContent.middleware";
 
 const { backendPort } = envVariables;
 
 const app = express();
 setupBasicMiddleware(app);
 setupRoutesMiddleware(app);
+setupStaticContent(app); 
 setupErrorMiddleware(app);
 
 databaseConnection()

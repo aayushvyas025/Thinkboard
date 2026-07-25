@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 function useFetchNoteById() {
   const [isLoading, setLoading] = useState(false);
-  const [note, setNote] = useState([]);
+  const [note, setNote] = useState({});
 
   async function fetchNoteById(id) {
     setLoading(true);

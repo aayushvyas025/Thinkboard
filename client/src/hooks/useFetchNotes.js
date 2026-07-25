@@ -11,7 +11,8 @@ function useFetchNotes() {
     setLoading(true);
     try {
       const response = await API.get(`/notes/fetch`);
-      setNotes(response.data.notes);
+      console.log(response)
+      setNotes(response?.data?.notes);
       setRateLimited(false);
     } catch (error) {
       console.error(`Error while fetching notes: ${error.message}`);
