@@ -3,23 +3,20 @@ import cors from "cors";
 import path from "path";
 import envVariables from "#constant/envs.constant";
 import apiRoutes from "#constant/routes.constant";
-import notesRoutes from "#routes/notes/notes.route";
 import setupErrorMiddleware from "#middleware/error/error.middleware";
 import databaseConnection from "#config/database/database.config";
-import rateLimiter from "#middleware/rate-limiting/rateLimiting.middleware";
+import rateLimiter from "#middleware/rate_limiting/rateLimiting.middleware";
 import setupBasicMiddleware from "#middleware/basic/basic.middleware";
+import setupRoutesMiddleware from "#middleware/api_routes/routes.middleware";
 
-const { backendPort, frontendDomain } = envVariables;
-const { BASE } = apiRoutes;
+const { backendPort } = envVariables;
 
 const app = express();
 const __dirname = path.resolve();
 
 setupBasicMiddleware(app, rateLimiter);
-
-app.use(BASE, notesRoutes);
+setupRoutesMiddleware(app);
 app.use(express.static(path.join(__dirname, "../client/dist")));
-
 setupErrorMiddleware(app);
 
 databaseConnection()
