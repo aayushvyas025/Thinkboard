@@ -15,7 +15,7 @@ function DetailNote({ note, setNote }) {
 
   async function handleUpdate(id) {
     const validation = inputValidations({
-      title: note?.title,
+      title: note.title,
       description: note?.description,
     });
 

@@ -12,6 +12,7 @@ import SectionHeader from "../components/page/SectionHeader"
 import Loader from "../components/loader/Loader";
 import { inputValidations } from "../utils/validations";
 import toast from "react-hot-toast";
+import CreateNoteSkeleton from "../components/skeletons/CreateNoteSkeleton";
 
 function Create() {
   const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
@@ -32,7 +33,7 @@ async function handleSubmit(event) {
     }
   }
   return (
-    <Suspense>
+    <Suspense fallback={<CreateNoteSkeleton />}>
       <Layout style={"min-h-screen bg-base-200 px-2"}>
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
