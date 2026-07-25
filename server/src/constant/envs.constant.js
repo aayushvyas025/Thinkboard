@@ -5,7 +5,8 @@ const envVariables = Object.freeze({
   mongodbUri: process.env.MONGODB_URI,
   upstashRedisRestUrl: process.env.UPSTASH_REDIS_REST_URL,
   upstashRedisRestToken: process.env.UPSTASH_REDIS_REST_TOKEN,
-  frontendDomain:process.env.FRONTEND_DOMAIN
+  frontendDomain:process.env.FRONTEND_DOMAIN,
+  nodeEnvironment:process.env.NODE_ENVIRONMENT
 });
 
 export default envVariables;
