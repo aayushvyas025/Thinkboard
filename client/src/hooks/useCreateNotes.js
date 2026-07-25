@@ -13,7 +13,8 @@ function useCreateNotes() {
         title: formData.title,
         description: formData.description,
       });
-      setFormData(response.data.newNote);
+      setFormData(response.data.newNote); 
+      return {success:true}
     } catch (error) {
       console.error(`Error, while creating notes ${error.message}`);
       toast.error("Error, while creating notes");
@@ -23,6 +24,7 @@ function useCreateNotes() {
           icon: "💀",
         });
       }
+      return {success:false}
     } finally {
       setIsLoading(false);
     }
