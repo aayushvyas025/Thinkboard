@@ -7,20 +7,21 @@ import NotesContainer from "../components/notes/NotesContainer";
 import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
 import NotesNotFound from "../components/notes/NotesNotFound";
+import NotesGridSkeleton from "../components/skeletons/NotesGridSkeleton";
 
 function Home() {
   const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
     useFetchNotes();
 
-    console.log(notes); 
+  console.log(notes);
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
   return (
-    <Suspense>
-      <Layout style={"relative min-h-screen"}>  
+    <Suspense fallback={<NotesGridSkeleton />}>
+      <Layout style={"relative min-h-screen"}>
         <BackgroundGradient />
         <Header />
         <div className="max-w-7xl mx-auto pt-4 mt-0">
