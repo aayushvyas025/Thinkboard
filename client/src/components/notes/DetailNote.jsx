@@ -34,6 +34,7 @@ function DetailNote({ note, setNote }) {
     );
     if (!confirm) return;
     deleteNote(id);
+    setNote((prev) => prev.filter((note) => note._id !== id));
     toast.success(`Note deleted successfully`);
     navigate("/");
   }
