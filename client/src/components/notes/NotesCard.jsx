@@ -14,7 +14,20 @@ function NotesCard({ note, setNotes }) {
       "Are you sure you want to delete this note?",
     );
     if (!confirm) return;
-    await deleteNote(id);
+    const { success, message, isRateLimited } = await deleteNote(id);
+
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+
+    if (isRateLimited) {
+      toast.error(`Slow down! You are creating the notes to fast`, {
+        duration: 4000,
+        icon: "💀",
+      });
+      return;
+    }
     setNotes((prev) => prev.filter((note) => note._id !== id));
     toast.success(`Note deleted successfully`);
   }

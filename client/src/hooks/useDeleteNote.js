@@ -8,15 +8,14 @@ function useDeleteNote() {
     setIsLoading(true);
     try {
       await API.delete(`notes/delete/${id}`);
+      return { success: true, message: `Note deleted successfully` };
     } catch (error) {
       console.error(`Error, while deleting note ${error.message}`);
-      toast.error(`Error, while deleting note`);
-      if (error?.response?.status === 429) {
-        toast.error(`Slow down! You are creating the notes to fast`, {
-          duration: 4000,
-          icon: "💀",
-        });
-      }
+      return {
+        success: false,
+        message: `Error, while deleting note`,
+        isRateLimited: error?.response?.status === 429,
+      };
     } finally {
       setIsLoading(false);
     }

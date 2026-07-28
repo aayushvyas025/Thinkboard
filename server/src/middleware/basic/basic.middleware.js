@@ -6,10 +6,10 @@ import rateLimiter from "#middleware/rate-limiting/rateLimiting.middleware";
 const { frontendDomain, nodeEnvironment } = envVariables;
 
 function setupBasicMiddleware(app) {
-  //  app-universal josn parser
+  //  app-universal json parser
   app.use(express.json());
   // cors connection
-  if (nodeEnvironment !== "production") {
+  if (nodeEnvironment === "production") {
     app.use(
       cors({
         origin: frontendDomain,
@@ -18,7 +18,6 @@ function setupBasicMiddleware(app) {
   }
   // rate limiter
   app.use(rateLimiter);
- 
 }
 
 export default setupBasicMiddleware;

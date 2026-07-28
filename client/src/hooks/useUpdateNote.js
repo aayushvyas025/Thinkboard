@@ -10,14 +10,14 @@ function useUpdateNote() {
     setSaving(true);
     try {
       await API.put(`/notes/update/${id}`, note);
+      return { success: true, message: `Note updated successfully` };
     } catch (error) {
-      console.error(`Error, while updating notes ${error.message}`);
-      if (error?.response?.status === 429) {
-        toast.error("Slow down! You are creating the notes to fast", {
-          duration: 4000,
-          icon: "💀",
-        });
-      }
+      console.error(`Error, while updating note ${error.message}`);
+      return {
+        success: false,
+        message: `Error, while updating note`,
+        isRateLimited: error.response.status === 429,
+      };
     } finally {
       setSaving(false);
     }

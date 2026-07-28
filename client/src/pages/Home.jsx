@@ -8,15 +8,23 @@ import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
 import NotesNotFound from "../components/notes/NotesNotFound";
 import NotesGridSkeleton from "../components/skeletons/NotesGridSkeleton";
+import toast from "react-hot-toast";
 
 function Home() {
-  const { isRateLimited, fetchNotes, notes, isLoading, setNotes } =
-    useFetchNotes();
+  const [notes, setNotes] = useState([]);
+  const { isRateLimited, fetchNotes, isLoading } = useFetchNotes();
 
-  console.log(notes);
+  async function handleFetchNotes() {
+    const { success, notes, message } = await fetchNotes();
+    if (!success) {
+      toast.error(message);
+      return; 
+    }
+    setNotes(notes);
+  }
 
   useEffect(() => {
-    fetchNotes();
+    handleFetchNotes();
   }, []);
 
   return (
@@ -35,7 +43,7 @@ function Home() {
               style={"text-center text-primary py-10"}
             />
           )}
-          {notes.length >= 0 && !isRateLimited && (
+          {notes.length > 0 && !isRateLimited && (
             <NotesContainer notes={notes} setNotes={setNotes} />
           )}
         </div>

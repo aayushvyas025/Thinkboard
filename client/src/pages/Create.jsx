@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import Layout from "../layout/Layout";
 import { Link, useNavigate } from "react-router";
 import useCreateNotes from "../hooks/useCreateNotes";
@@ -8,16 +8,18 @@ import Label from "../components/Label/Label";
 import Input from "../components/input/Input";
 import BackButton from "../components/BackButton/BackButton";
 import FormInput from "../components/input/FormInput";
-import SectionHeader from "../components/page/SectionHeader"
+import SectionHeader from "../components/page/SectionHeader";
 import Loader from "../components/loader/Loader";
 import { inputValidations } from "../utils/validations";
 import toast from "react-hot-toast";
 import CreateNoteSkeleton from "../components/skeletons/CreateNoteSkeleton";
 
 function Create() {
-  const { createNotes, formData, setFormData, isLoading } = useCreateNotes();
+  const [formData, setFormData] = useState({ title: "", description: "" });
+  const { createNotes, isLoading } = useCreateNotes();
   const navigate = useNavigate();
-async function handleSubmit(event) {
+
+  async function handleSubmit(event) {
     event.preventDefault();
     const validation = inputValidations({
       title: formData.title,
@@ -26,11 +28,27 @@ async function handleSubmit(event) {
 
     if (!validation.success) {
       toast.error(`All fields are required`);
-    } else {
-     await createNotes();
-      toast.success(`Notes created successfully`);
-      navigate("/");
+      return;
     }
+
+    const { success, message, newNote, isRateLimited } = await createNotes({
+      title: formData.title,
+      description: formData.description,
+    });
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+
+    if (isRateLimited) {
+      toast.error(`Slow down! You are creating the notes to fast`, {
+        duration: 4000,
+        icon: "💀",
+      });
+      return;
+    }
+    toast.success(`Notes created successfully`);
+    navigate("/");
   }
   return (
     <Suspense fallback={<CreateNoteSkeleton />}>

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import useFetchNoteById from "../hooks/useFetchNoteById";
 import { Link, useParams } from "react-router";
@@ -10,12 +10,31 @@ import DetailNote from "../components/notes/DetailNote";
 import NoteDetailSkeleton from "../components/skeletons/NoteDetailSkeleton";
 
 function NoteDetail() {
-  const { isLoading, isRateLimited, note, fetchNoteById, setNote } =
-    useFetchNoteById();
+  const [note, setNote] = useState({});
+  const { isLoading, fetchNoteById } = useFetchNoteById();
   const { id } = useParams();
 
+  async function handleFetchNote(id) {
+    const { success, noteById, message, isRateLimited } =
+      await fetchNoteById(id);
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+
+    if (isRateLimited) {
+      toast.error(`Slow down! You are creating the notes to fast`, {
+        duration: 4000,
+        icon: "💀",
+      });
+      return;
+    }
+
+    setNote(noteById);
+  }
+
   useEffect(() => {
-    fetchNoteById(id);
+    handleFetchNote(id);
   }, [id]);
 
   if (isLoading) {

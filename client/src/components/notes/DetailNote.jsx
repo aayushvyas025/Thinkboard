@@ -16,16 +16,29 @@ function DetailNote({ note, setNote }) {
   async function handleUpdate(id) {
     const validation = inputValidations({
       title: note.title,
-      description: note?.description,
+      description: note.description,
     });
 
     if (!validation.success) {
       toast.error("All fields are required");
-    } else {
-      await updateNote(id, note);
-      toast.success("Notes updated successfully");
-      navigate("/");
+      return;
     }
+
+    const { success, message, isRateLimited } = await updateNote(id, note);
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+
+    if (isRateLimited) {
+      toast.error(`Slow down! You are creating the notes to fast`, {
+        duration: 4000,
+        icon: "💀",
+      });
+      return;
+    }
+    toast.success("Notes updated successfully");
+    navigate("/");
   }
 
   async function handleDelete(id) {
@@ -33,7 +46,18 @@ function DetailNote({ note, setNote }) {
       "Are you sure you want to delete this note?",
     );
     if (!confirm) return;
-    await deleteNote(id);
+    const { success, message, isRateLimited } = await deleteNote(id);
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+    if (isRateLimited) {
+      toast.error(`Slow down! You are creating the notes to fast`, {
+        duration: 4000,
+        icon: "💀",
+      });
+      return;
+    }
     toast.success(`Note deleted successfully`);
     navigate("/");
   }
