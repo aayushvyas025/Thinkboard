@@ -2,13 +2,13 @@ import React, { Suspense, useEffect, useState } from "react";
 import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";
-import Loader from "../components/loader/loader";
 import NotesContainer from "../components/notes/NotesContainer";
 import RateLimiting from "../components/rate-limiting/RateLimiting";
 import BackgroundGradient from "../components/gradient/BackgroundGradient";
 import NotesNotFound from "../components/notes/NotesNotFound";
 import NotesGridSkeleton from "../components/skeletons/NotesGridSkeleton";
 import toast from "react-hot-toast";
+import Loader from "../components/loader/Loader";
 
 function Home() {
   const [notes, setNotes] = useState([]);
