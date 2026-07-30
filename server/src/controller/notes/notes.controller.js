@@ -112,6 +112,9 @@ export const updateNote = async (request, response, next) => {
     const updatedNote = await Note.findByIdAndUpdate(id, {
       title,
       description,
+    }, {
+      new:true, 
+      runValidators:true
     });
 
     if (!updateNote) {
