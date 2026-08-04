@@ -75,6 +75,13 @@ export const createNote = async (request, response, next) => {
   }
 
   try {
+    const existingNotes = await Note.findOne({ title });
+    if (existingNotes.title === title) {
+      return response
+        .status(notFound)
+        .json({ success: false, message: noNotesFound });
+    }
+
     const newNote = new Note({ title, description });
     await newNote.save();
 
@@ -109,13 +116,17 @@ export const updateNote = async (request, response, next) => {
     });
   }
   try {
-    const updatedNote = await Note.findByIdAndUpdate(id, {
-      title,
-      description,
-    }, {
-      new:true, 
-      runValidators:true
-    });
+    const updatedNote = await Note.findByIdAndUpdate(
+      id,
+      {
+        title,
+        description,
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     if (!updateNote) {
       return response
