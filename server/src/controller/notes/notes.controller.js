@@ -76,7 +76,7 @@ export const createNote = async (request, response, next) => {
 
   try {
     const existingNotes = await Note.findOne({ title });
-    if (existingNotes.title === title) {
+    if (existingNotes.title) {
       return response
         .status(notFound)
         .json({ success: false, message: noNotesFound });
