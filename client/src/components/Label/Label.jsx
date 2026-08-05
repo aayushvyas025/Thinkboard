@@ -1,5 +1,3 @@
-import React from "react";
-
 function Label({ ref, label }) {
   return (
     <label htmlFor={ref} className="input">

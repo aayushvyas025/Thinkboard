@@ -1,5 +1,3 @@
-import React from "react";
-
 function TextArea({ id, placeholder, onChangeHandler, value, style }) {
   return (
     <textarea

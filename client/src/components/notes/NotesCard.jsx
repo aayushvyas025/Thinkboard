@@ -1,12 +1,11 @@
 import { PenSquareIcon, Trash2Icon } from "lucide-react";
-import React from "react";
 import { Link } from "react-router";
 import { formattedDate } from "../../utils/dateUtils";
 import useDeleteNote from "../../hooks/useDeleteNote";
 import toast from "react-hot-toast";
 
 function NotesCard({ note, setNotes }) {
-  const { deleteNote, isLoading } = useDeleteNote();
+  const { deleteNote } = useDeleteNote();
 
   async function handleDelete(event, id) {
     event.preventDefault();

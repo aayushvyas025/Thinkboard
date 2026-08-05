@@ -1,4 +1,3 @@
-import React from "react";
 import BackButton from "../BackButton/BackButton";
 import { Trash2Icon } from "lucide-react";
 import FormInput from "../input/FormInput";

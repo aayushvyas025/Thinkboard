@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../config/axiosConfig";
-import toast from "react-hot-toast";
+
 
 function useDeleteNote() {
   const [isLoading, setIsLoading] = useState(false);

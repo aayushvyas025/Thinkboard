@@ -1,5 +1,3 @@
-import React from "react";
-
 function Layout({ children, style }) {
   return <main className={style}>{children}</main>;
 }

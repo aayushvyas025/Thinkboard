@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
 import API from "../config/axiosConfig";
-import toast from "react-hot-toast";
+
 
 function useUpdateNote() {
   const [saving, setSaving] = useState(false);

@@ -1,6 +1,6 @@
 import BackgroundGradient from "./components/gradient/BackgroundGradient";
 import AppRoutes from "./routes/AppRoutes";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 
 function App() {
   return (

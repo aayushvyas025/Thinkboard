@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from "lucide-react";
-import React from "react";
 import { Link } from "react-router";
 
 function BackButton({ title, link }) {

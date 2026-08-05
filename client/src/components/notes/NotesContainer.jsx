@@ -1,6 +1,3 @@
-import React from "react";
-import { Link } from "react-router";
-import { PenSquareIcon, Trash2Icon } from "lucide-react";
 import NotesCard from "./NotesCard";
 
 

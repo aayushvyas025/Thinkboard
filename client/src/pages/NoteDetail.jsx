@@ -1,13 +1,12 @@
-import React, { Suspense, useEffect, useState } from "react";
+import  { Suspense, useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import useFetchNoteById from "../hooks/useFetchNoteById";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import Loader from "../components/loader/Loader";
-import { LoaderIcon, Trash2Icon } from "lucide-react";
-import BackButton from "../components/BackButton/BackButton";
-import useDeleteNote from "../hooks/useDeleteNote";
+import { LoaderIcon } from "lucide-react";
 import DetailNote from "../components/notes/DetailNote";
 import NoteDetailSkeleton from "../components/skeletons/NoteDetailSkeleton";
+import toast from "react-hot-toast";
 
 function NoteDetail() {
   const [note, setNote] = useState({});

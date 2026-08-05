@@ -1,11 +1,8 @@
-import React, { Suspense, useState } from "react";
+import  { Suspense, useState } from "react";
 import Layout from "../layout/Layout";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import useCreateNotes from "../hooks/useCreateNotes";
-import { ArrowLeftIcon } from "lucide-react";
 import Form from "../components/form/Form";
-import Label from "../components/Label/Label";
-import Input from "../components/input/Input";
 import BackButton from "../components/BackButton/BackButton";
 import FormInput from "../components/input/FormInput";
 import SectionHeader from "../components/page/SectionHeader";
@@ -31,7 +28,7 @@ function Create() {
       return;
     }
 
-    const { success, message, newNote, isRateLimited } = await createNotes({
+    const { success, message, isRateLimited } = await createNotes({
       title: formData.title,
       description: formData.description,
     });

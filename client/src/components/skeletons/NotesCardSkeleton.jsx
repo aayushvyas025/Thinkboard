@@ -1,5 +1,3 @@
-import React from "react";
-
 function NotesCardSkeleton() {
   return (
     <div className="card bg-base-100 border-t-4 border-solid border-base-300 shadow-sm animate-pulse">

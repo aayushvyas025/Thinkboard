@@ -2,7 +2,7 @@ import path from "path";
 import express from "express";
 import envVariables from "#constant/envs.constant";
 
-const { frontendDomain, nodeEnvironment } = envVariables;
+const { nodeEnvironment } = envVariables;
 const __dirname = path.resolve();
 
 function setupStaticContent(app) {

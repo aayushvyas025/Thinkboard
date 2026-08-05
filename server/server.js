@@ -1,6 +1,5 @@
 import express from "express";
 import envVariables from "#constant/envs.constant";
-import apiRoutes from "#constant/routes.constant";
 import databaseConnection from "#config/database/database.config";
 import setupErrorMiddleware from "#middleware/error/error.middleware";
 import setupBasicMiddleware from "#middleware/basic/basic.middleware";

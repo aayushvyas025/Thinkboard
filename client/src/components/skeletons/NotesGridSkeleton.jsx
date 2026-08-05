@@ -1,4 +1,3 @@
-import React from "react";
 import NotesCardSkeleton from "./NotesCardSkeleton";
 
 function NotesGridSkeleton() {

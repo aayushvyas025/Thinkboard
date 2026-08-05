@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import  { Suspense, useEffect, useState } from "react";
 import Header from "../components/page/Header";
 import Layout from "../layout/Layout";
 import useFetchNotes from "../hooks/useFetchNotes";

@@ -1,5 +1,4 @@
 import Note from "#model/notes/notes.model";
-import mongoose from "mongoose";
 import serverResponses from "#constant/responses.constant";
 import { validateId, validateParams } from "#validation/params.validation";
 
@@ -128,14 +127,14 @@ export const updateNote = async (request, response, next) => {
       },
     );
 
-    if (!updateNote) {
+    if (!updatedNote) {
       return response
         .status(notFound)
         .json({ success: failure, message: noteNotFound });
     }
     return response
       .status(ok)
-      .json({ success: success, message: notesUpdated, updateNote });
+      .json({ success: success, message: notesUpdated, updatedNote });
   } catch (error) {
     console.error(`Error, while update note:${error.message}`);
     next(error);

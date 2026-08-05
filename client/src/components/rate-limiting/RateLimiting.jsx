@@ -1,5 +1,4 @@
 import { ZapIcon } from "lucide-react";
-import React from "react";
 
 function RateLimiting() {
   return (

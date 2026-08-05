@@ -1,6 +1,4 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
-import envVariables from "../constant/envVariables";
 import API from "../config/axiosConfig";
 
 function useFetchNotes() {
